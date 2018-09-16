@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drcsy.am.dao.RecordMapper">
+	<resultMap id="BaseResultMap" type="com.drcsy.am.dto.Record">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="patient_id" property="patient_id"
+			jdbcType="VARCHAR" />
+		<result column="patient_name" property="patient_name"
+			jdbcType="VARCHAR" />
+		<result column="patient_tel" property="patient_tel"
+			jdbcType="VARCHAR" />
+		<result column="apply_doctor_id" property="apply_doctor_id"
+			jdbcType="VARCHAR" />
+		<result column="diagnosis_doctor_id"
+			property="diagnosis_doctor_id" jdbcType="VARCHAR" />
+		<result column="operate_doctor_id" property="operate_doctor_id"
+			jdbcType="VARCHAR" />
+		<result column="diagnosis_doctor_group_id"
+			property="diagnosis_doctor_group_id" jdbcType="VARCHAR" />
+		<result column="belong_hospital_id"
+			property="belong_hospital_id" jdbcType="VARCHAR" />
+		<result column="move_hospital_id" property="move_hospital_id"
+			jdbcType="VARCHAR" />
+		<result column="move_doctor_id" property="move_doctor_id"
+			jdbcType="VARCHAR" />
+		<result column="image_see_id" property="image_see_id"
+			jdbcType="VARCHAR" />
+		<result column="check_point" property="check_point"
+			jdbcType="VARCHAR" />
+		<result column="check_point_number"
+			property="check_point_number" jdbcType="INTEGER" />
+		<result column="check_type" property="check_type"
+			jdbcType="VARCHAR" />
+		<result column="check_function" property="check_function"
+			jdbcType="VARCHAR" />
+		<result column="department" property="department"
+			jdbcType="VARCHAR" />
+		<result column="report_status" property="report_status"
+			jdbcType="VARCHAR" />
+		<result column="report_status_desc"
+			property="report_status_desc" jdbcType="VARCHAR" />
+		<result column="moved_status" property="moved_status"
+			jdbcType="VARCHAR" />
+		<result column="moved_status_desc" property="moved_status_desc"
+			jdbcType="VARCHAR" />
+		<result column="report_type" property="report_type"
+			jdbcType="VARCHAR" />
+		<result column="report_date" property="report_date"
+			jdbcType="TIMESTAMP" />
+		<result column="check_date" property="check_date"
+			jdbcType="TIMESTAMP" />
+		<result column="apply_date" property="apply_date"
+			jdbcType="TIMESTAMP" />
+		<result column="outpatient" property="outpatient"
+			jdbcType="VARCHAR" />
+		<result column="outhospital" property="outhospital"
+			jdbcType="VARCHAR" />
+		<result column="outrecord" property="outrecord"
+			jdbcType="VARCHAR" />
+		<result column="medical_history" property="medical_history"
+			jdbcType="VARCHAR" />
+		<result column="ct_files" property="ct_files"
+			jdbcType="VARCHAR" />
+		<result column="modify_date" property="modify_date"
+			jdbcType="TIMESTAMP" />
+		<result column="create_date" property="create_date"
+			jdbcType="TIMESTAMP" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="belong_hospital_code"
+			property="belong_hospital_code" jdbcType="VARCHAR" />
+		<result column="dicom_patient_id" property="dicom_patient_id"
+			jdbcType="VARCHAR" />
+		<result column="accepts_date" property="accepts_date"
+			jdbcType="TIMESTAMP" />
+		<result column="patient_sex" property="patient_sex"
+			jdbcType="VARCHAR" />
+		<result column="patient_birthday" property="patient_birthday"
+			jdbcType="TIMESTAMP" />
+		<result column="patient_age" property="patient_age"
+			jdbcType="VARCHAR" />
+		<result column="institution_name" property="institution_name"
+			jdbcType="VARCHAR" />
+		<result column="move_date" property="move_date"
+			jdbcType="TIMESTAMP" />
+		<result column="name_quanpin" property="name_quanpin"
+			jdbcType="VARCHAR" />
+		<result column="name_first_pinyin" property="name_first_pinyin"
+			jdbcType="VARCHAR" />
+		<result column="bespokeId" property="bespokeId"
+			jdbcType="VARCHAR" />
+		<result column="patinetRecord_status"
+			property="patinetRecord_status" jdbcType="VARCHAR" />
+		<result column="record_check_body" property="record_check_body"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, patient_id, patient_name, patient_tel, apply_doctor_id,
+		diagnosis_doctor_id,
+		operate_doctor_id, diagnosis_doctor_group_id,
+		belong_hospital_id, move_hospital_id,
+		move_doctor_id, image_see_id,
+		check_point, check_point_number,
+		check_type, check_function,
+		department, report_status, report_status_desc, moved_status,
+		moved_status_desc,
+		report_type,
+		report_date, check_date, apply_date,
+		outpatient, outhospital, outrecord,
+		medical_history,
+		ct_files,
+		modify_date, create_date, remark, belong_hospital_code,
+		dicom_patient_id,
+		accepts_date, patient_sex, patient_birthday,
+		patient_age, institution_name,
+		move_date,
+		name_quanpin,
+		name_first_pinyin, bespokeId, patinetRecord_status, record_check_body
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from pis_patient_record
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		pis_patient_record
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.drcsy.am.dto.Record">
+		<selectKey resultType="java.lang.String" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into pis_patient_record (patient_id, patient_name, patient_tel,
+		apply_doctor_id, diagnosis_doctor_id, operate_doctor_id,
+		diagnosis_doctor_group_id, belong_hospital_id,
+		move_hospital_id,
+		move_doctor_id, image_see_id,
+		check_point, check_point_number,
+		check_type,
+		check_function, department, report_status,
+		report_status_desc, moved_status, moved_status_desc,
+		report_type,
+		report_date, check_date,
+		apply_date, outpatient, outhospital,
+		outrecord, medical_history, ct_files,
+		modify_date, create_date, remark,
+		belong_hospital_code, dicom_patient_id,
+		accepts_date, patient_sex,
+		patient_birthday,
+		patient_age, institution_name, move_date,
+		name_quanpin, name_first_pinyin, bespokeId,
+		patinetRecord_status,
+		record_check_body
+		)
+		values (#{patient_id,jdbcType=VARCHAR},
+		#{patient_name,jdbcType=VARCHAR},
+		#{patient_tel,jdbcType=VARCHAR},
+		#{apply_doctor_id,jdbcType=VARCHAR},
+		#{diagnosis_doctor_id,jdbcType=VARCHAR},
+		#{operate_doctor_id,jdbcType=VARCHAR},
+		#{diagnosis_doctor_group_id,jdbcType=VARCHAR},
+		#{belong_hospital_id,jdbcType=VARCHAR},
+		#{move_hospital_id,jdbcType=VARCHAR},
+		#{move_doctor_id,jdbcType=VARCHAR}, #{image_see_id,jdbcType=VARCHAR},
+		#{check_point,jdbcType=VARCHAR},
+		#{check_point_number,jdbcType=INTEGER},
+		#{check_type,jdbcType=VARCHAR},
+		#{check_function,jdbcType=VARCHAR},
+		#{department,jdbcType=VARCHAR}, #{report_status,jdbcType=VARCHAR},
+		#{report_status_desc,jdbcType=VARCHAR},
+		#{moved_status,jdbcType=VARCHAR},
+		#{moved_status_desc,jdbcType=VARCHAR},
+		#{report_type,jdbcType=VARCHAR}, #{report_date,jdbcType=TIMESTAMP},
+		#{check_date,jdbcType=TIMESTAMP},
+		#{apply_date,jdbcType=TIMESTAMP},
+		#{outpatient,jdbcType=VARCHAR}, #{outhospital,jdbcType=VARCHAR},
+		#{outrecord,jdbcType=VARCHAR}, #{medical_history,jdbcType=VARCHAR},
+		#{ct_files,jdbcType=VARCHAR},
+		#{modify_date,jdbcType=TIMESTAMP},
+		#{create_date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},
+		#{belong_hospital_code,jdbcType=VARCHAR},
+		#{dicom_patient_id,jdbcType=VARCHAR},
+		#{accepts_date,jdbcType=TIMESTAMP}, #{patient_sex,jdbcType=VARCHAR},
+		#{patient_birthday,jdbcType=TIMESTAMP},
+		#{patient_age,jdbcType=VARCHAR}, #{institution_name,jdbcType=VARCHAR},
+		#{move_date,jdbcType=TIMESTAMP},
+		#{name_quanpin,jdbcType=VARCHAR},
+		#{name_first_pinyin,jdbcType=VARCHAR}, #{bespokeId,jdbcType=VARCHAR},
+		#{patinetRecord_status,jdbcType=VARCHAR},
+		#{record_check_body,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.drcsy.am.dto.Record">
+		<selectKey resultType="java.lang.String" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into pis_patient_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="patient_id != null">
+				patient_id,
+			</if>
+			<if test="patient_name != null">
+				patient_name,
+			</if>
+			<if test="patient_tel != null">
+				patient_tel,
+			</if>
+			<if test="apply_doctor_id != null">
+				apply_doctor_id,
+			</if>
+			<if test="diagnosis_doctor_id != null">
+				diagnosis_doctor_id,
+			</if>
+			<if test="operate_doctor_id != null">
+				operate_doctor_id,
+			</if>
+			<if test="diagnosis_doctor_group_id != null">
+				diagnosis_doctor_group_id,
+			</if>
+			<if test="belong_hospital_id != null">
+				belong_hospital_id,
+			</if>
+			<if test="move_hospital_id != null">
+				move_hospital_id,
+			</if>
+			<if test="move_doctor_id != null">
+				move_doctor_id,
+			</if>
+			<if test="image_see_id != null">
+				image_see_id,
+			</if>
+			<if test="check_point != null">
+				check_point,
+			</if>
+			<if test="check_point_number != null">
+				check_point_number,
+			</if>
+			<if test="check_type != null">
+				check_type,
+			</if>
+			<if test="check_function != null">
+				check_function,
+			</if>
+			<if test="department != null">
+				department,
+			</if>
+			<if test="report_status != null">
+				report_status,
+			</if>
+			<if test="report_status_desc != null">
+				report_status_desc,
+			</if>
+			<if test="moved_status != null">
+				moved_status,
+			</if>
+			<if test="moved_status_desc != null">
+				moved_status_desc,
+			</if>
+			<if test="report_type != null">
+				report_type,
+			</if>
+			<if test="report_date != null">
+				report_date,
+			</if>
+			<if test="check_date != null">
+				check_date,
+			</if>
+			<if test="apply_date != null">
+				apply_date,
+			</if>
+			<if test="outpatient != null">
+				outpatient,
+			</if>
+			<if test="outhospital != null">
+				outhospital,
+			</if>
+			<if test="outrecord != null">
+				outrecord,
+			</if>
+			<if test="medical_history != null">
+				medical_history,
+			</if>
+			<if test="ct_files != null">
+				ct_files,
+			</if>
+			<if test="modify_date != null">
+				modify_date,
+			</if>
+			<if test="create_date != null">
+				create_date,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="belong_hospital_code != null">
+				belong_hospital_code,
+			</if>
+			<if test="dicom_patient_id != null">
+				dicom_patient_id,
+			</if>
+			<if test="accepts_date != null">
+				accepts_date,
+			</if>
+			<if test="patient_sex != null">
+				patient_sex,
+			</if>
+			<if test="patient_birthday != null">
+				patient_birthday,
+			</if>
+			<if test="patient_age != null">
+				patient_age,
+			</if>
+			<if test="institution_name != null">
+				institution_name,
+			</if>
+			<if test="move_date != null">
+				move_date,
+			</if>
+			<if test="name_quanpin != null">
+				name_quanpin,
+			</if>
+			<if test="name_first_pinyin != null">
+				name_first_pinyin,
+			</if>
+			<if test="bespokeId != null">
+				bespokeId,
+			</if>
+			<if test="patinetRecord_status != null">
+				patinetRecord_status,
+			</if>
+			<if test="record_check_body != null">
+				record_check_body,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="patient_id != null">
+				#{patient_id,jdbcType=VARCHAR},
+			</if>
+			<if test="patient_name != null">
+				#{patient_name,jdbcType=VARCHAR},
+			</if>
+			<if test="patient_tel != null">
+				#{patient_tel,jdbcType=VARCHAR},
+			</if>
+			<if test="apply_doctor_id != null">
+				#{apply_doctor_id,jdbcType=VARCHAR},
+			</if>
+			<if test="diagnosis_doctor_id != null">
+				#{diagnosis_doctor_id,jdbcType=VARCHAR},
+			</if>
+			<if test="operate_doctor_id != null">
+				#{operate_doctor_id,jdbcType=VARCHAR},
+			</if>
+			<if test="diagnosis_doctor_group_id != null">
+				#{diagnosis_doctor_group_id,jdbcType=VARCHAR},
+			</if>
+			<if test="belong_hospital_id != null">
+				#{belong_hospital_id,jdbcType=VARCHAR},
+			</if>
+			<if test="move_hospital_id != null">
+				#{move_hospital_id,jdbcType=VARCHAR},
+			</if>
+			<if test="move_doctor_id != null">
+				#{move_doctor_id,jdbcType=VARCHAR},
+			</if>
+			<if test="image_see_id != null">
+				#{image_see_id,jdbcType=VARCHAR},
+			</if>
+			<if test="check_point != null">
+				#{check_point,jdbcType=VARCHAR},
+			</if>
+			<if test="check_point_number != null">
+				#{check_point_number,jdbcType=INTEGER},
+			</if>
+			<if test="check_type != null">
+				#{check_type,jdbcType=VARCHAR},
+			</if>
+			<if test="check_function != null">
+				#{check_function,jdbcType=VARCHAR},
+			</if>
+			<if test="department != null">
+				#{department,jdbcType=VARCHAR},
+			</if>
+			<if test="report_status != null">
+				#{report_status,jdbcType=VARCHAR},
+			</if>
+			<if test="report_status_desc != null">
+				#{report_status_desc,jdbcType=VARCHAR},
+			</if>
+			<if test="moved_status != null">
+				#{moved_status,jdbcType=VARCHAR},
+			</if>
+			<if test="moved_status_desc != null">
+				#{moved_status_desc,jdbcType=VARCHAR},
+			</if>
+			<if test="report_type != null">
+				#{report_type,jdbcType=VARCHAR},
+			</if>
+			<if test="report_date != null">
+				#{report_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="check_date != null">
+				#{check_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="apply_date != null">
+				#{apply_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="outpatient != null">
+				#{outpatient,jdbcType=VARCHAR},
+			</if>
+			<if test="outhospital != null">
+				#{outhospital,jdbcType=VARCHAR},
+			</if>
+			<if test="outrecord != null">
+				#{outrecord,jdbcType=VARCHAR},
+			</if>
+			<if test="medical_history != null">
+				#{medical_history,jdbcType=VARCHAR},
+			</if>
+			<if test="ct_files != null">
+				#{ct_files,jdbcType=VARCHAR},
+			</if>
+			<if test="modify_date != null">
+				#{modify_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="create_date != null">
+				#{create_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="belong_hospital_code != null">
+				#{belong_hospital_code,jdbcType=VARCHAR},
+			</if>
+			<if test="dicom_patient_id != null">
+				#{dicom_patient_id,jdbcType=VARCHAR},
+			</if>
+			<if test="accepts_date != null">
+				#{accepts_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="patient_sex != null">
+				#{patient_sex,jdbcType=VARCHAR},
+			</if>
+			<if test="patient_birthday != null">
+				#{patient_birthday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="patient_age != null">
+				#{patient_age,jdbcType=VARCHAR},
+			</if>
+			<if test="institution_name != null">
+				#{institution_name,jdbcType=VARCHAR},
+			</if>
+			<if test="move_date != null">
+				#{move_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="name_quanpin != null">
+				#{name_quanpin,jdbcType=VARCHAR},
+			</if>
+			<if test="name_first_pinyin != null">
+				#{name_first_pinyin,jdbcType=VARCHAR},
+			</if>
+			<if test="bespokeId != null">
+				#{bespokeId,jdbcType=VARCHAR},
+			</if>
+			<if test="patinetRecord_status != null">
+				#{patinetRecord_status,jdbcType=VARCHAR},
+			</if>
+			<if test="record_check_body != null">
+				#{record_check_body,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.drcsy.am.dto.Record">
+		update pis_patient_record
+		<set>
+			<if test="patient_id != null">
+				patient_id = #{patient_id,jdbcType=VARCHAR},
+			</if>
+			<if test="patient_name != null">
+				patient_name = #{patient_name,jdbcType=VARCHAR},
+			</if>
+			<if test="patient_tel != null">
+				patient_tel = #{patient_tel,jdbcType=VARCHAR},
+			</if>
+			<if test="apply_doctor_id != null">
+				apply_doctor_id = #{apply_doctor_id,jdbcType=VARCHAR},
+			</if>
+			<if test="diagnosis_doctor_id != null">
+				diagnosis_doctor_id =
+				#{diagnosis_doctor_id,jdbcType=VARCHAR},
+			</if>
+			<if test="operate_doctor_id != null">
+				operate_doctor_id =
+				#{operate_doctor_id,jdbcType=VARCHAR},
+			</if>
+			<if test="diagnosis_doctor_group_id != null">
+				diagnosis_doctor_group_id =
+				#{diagnosis_doctor_group_id,jdbcType=VARCHAR},
+			</if>
+			<if test="belong_hospital_id != null">
+				belong_hospital_id =
+				#{belong_hospital_id,jdbcType=VARCHAR},
+			</if>
+			<if test="move_hospital_id != null">
+				move_hospital_id = #{move_hospital_id,jdbcType=VARCHAR},
+			</if>
+			<if test="move_doctor_id != null">
+				move_doctor_id = #{move_doctor_id,jdbcType=VARCHAR},
+			</if>
+			<if test="image_see_id != null">
+				image_see_id = #{image_see_id,jdbcType=VARCHAR},
+			</if>
+			<if test="check_point != null">
+				check_point = #{check_point,jdbcType=VARCHAR},
+			</if>
+			<if test="check_point_number != null">
+				check_point_number =
+				#{check_point_number,jdbcType=INTEGER},
+			</if>
+			<if test="check_type != null">
+				check_type = #{check_type,jdbcType=VARCHAR},
+			</if>
+			<if test="check_function != null">
+				check_function = #{check_function,jdbcType=VARCHAR},
+			</if>
+			<if test="department != null">
+				department = #{department,jdbcType=VARCHAR},
+			</if>
+			<if test="report_status != null">
+				report_status = #{report_status,jdbcType=VARCHAR},
+			</if>
+			<if test="report_status_desc != null">
+				report_status_desc =
+				#{report_status_desc,jdbcType=VARCHAR},
+			</if>
+			<if test="moved_status != null">
+				moved_status = #{moved_status,jdbcType=VARCHAR},
+			</if>
+			<if test="moved_status_desc != null">
+				moved_status_desc =
+				#{moved_status_desc,jdbcType=VARCHAR},
+			</if>
+			<if test="report_type != null">
+				report_type = #{report_type,jdbcType=VARCHAR},
+			</if>
+			<if test="report_date != null">
+				report_date = #{report_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="check_date != null">
+				check_date = #{check_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="apply_date != null">
+				apply_date = #{apply_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="outpatient != null">
+				outpatient = #{outpatient,jdbcType=VARCHAR},
+			</if>
+			<if test="outhospital != null">
+				outhospital = #{outhospital,jdbcType=VARCHAR},
+			</if>
+			<if test="outrecord != null">
+				outrecord = #{outrecord,jdbcType=VARCHAR},
+			</if>
+			<if test="medical_history != null">
+				medical_history = #{medical_history,jdbcType=VARCHAR},
+			</if>
+			<if test="ct_files != null">
+				ct_files = #{ct_files,jdbcType=VARCHAR},
+			</if>
+			<if test="modify_date != null">
+				modify_date = #{modify_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="create_date != null">
+				create_date = #{create_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="belong_hospital_code != null">
+				belong_hospital_code =
+				#{belong_hospital_code,jdbcType=VARCHAR},
+			</if>
+			<if test="dicom_patient_id != null">
+				dicom_patient_id = #{dicom_patient_id,jdbcType=VARCHAR},
+			</if>
+			<if test="accepts_date != null">
+				accepts_date = #{accepts_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="patient_sex != null">
+				patient_sex = #{patient_sex,jdbcType=VARCHAR},
+			</if>
+			<if test="patient_birthday != null">
+				patient_birthday =
+				#{patient_birthday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="patient_age != null">
+				patient_age = #{patient_age,jdbcType=VARCHAR},
+			</if>
+			<if test="institution_name != null">
+				institution_name = #{institution_name,jdbcType=VARCHAR},
+			</if>
+			<if test="move_date != null">
+				move_date = #{move_date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="name_quanpin != null">
+				name_quanpin = #{name_quanpin,jdbcType=VARCHAR},
+			</if>
+			<if test="name_first_pinyin != null">
+				name_first_pinyin =
+				#{name_first_pinyin,jdbcType=VARCHAR},
+			</if>
+			<if test="bespokeId != null">
+				bespokeId = #{bespokeId,jdbcType=VARCHAR},
+			</if>
+			<if test="patinetRecord_status != null">
+				patinetRecord_status =
+				#{patinetRecord_status,jdbcType=VARCHAR},
+			</if>
+			<if test="record_check_body != null">
+				record_check_body =
+				#{record_check_body,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.drcsy.am.dto.Record">
+		update pis_patient_record
+		set patient_id =
+		#{patient_id,jdbcType=VARCHAR},
+		patient_name =
+		#{patient_name,jdbcType=VARCHAR},
+		patient_tel =
+		#{patient_tel,jdbcType=VARCHAR},
+		apply_doctor_id =
+		#{apply_doctor_id,jdbcType=VARCHAR},
+		diagnosis_doctor_id =
+		#{diagnosis_doctor_id,jdbcType=VARCHAR},
+		operate_doctor_id =
+		#{operate_doctor_id,jdbcType=VARCHAR},
+		diagnosis_doctor_group_id =
+		#{diagnosis_doctor_group_id,jdbcType=VARCHAR},
+		belong_hospital_id =
+		#{belong_hospital_id,jdbcType=VARCHAR},
+		move_hospital_id =
+		#{move_hospital_id,jdbcType=VARCHAR},
+		move_doctor_id =
+		#{move_doctor_id,jdbcType=VARCHAR},
+		image_see_id =
+		#{image_see_id,jdbcType=VARCHAR},
+		check_point =
+		#{check_point,jdbcType=VARCHAR},
+		check_point_number =
+		#{check_point_number,jdbcType=INTEGER},
+		check_type =
+		#{check_type,jdbcType=VARCHAR},
+		check_function =
+		#{check_function,jdbcType=VARCHAR},
+		department =
+		#{department,jdbcType=VARCHAR},
+		report_status =
+		#{report_status,jdbcType=VARCHAR},
+		report_status_desc =
+		#{report_status_desc,jdbcType=VARCHAR},
+		moved_status =
+		#{moved_status,jdbcType=VARCHAR},
+		moved_status_desc =
+		#{moved_status_desc,jdbcType=VARCHAR},
+		report_type =
+		#{report_type,jdbcType=VARCHAR},
+		report_date =
+		#{report_date,jdbcType=TIMESTAMP},
+		check_date =
+		#{check_date,jdbcType=TIMESTAMP},
+		apply_date =
+		#{apply_date,jdbcType=TIMESTAMP},
+		outpatient =
+		#{outpatient,jdbcType=VARCHAR},
+		outhospital =
+		#{outhospital,jdbcType=VARCHAR},
+		outrecord =
+		#{outrecord,jdbcType=VARCHAR},
+		medical_history =
+		#{medical_history,jdbcType=VARCHAR},
+		ct_files =
+		#{ct_files,jdbcType=VARCHAR},
+		modify_date =
+		#{modify_date,jdbcType=TIMESTAMP},
+		create_date =
+		#{create_date,jdbcType=TIMESTAMP},
+		remark = #{remark,jdbcType=VARCHAR},
+		belong_hospital_code = #{belong_hospital_code,jdbcType=VARCHAR},
+		dicom_patient_id = #{dicom_patient_id,jdbcType=VARCHAR},
+		accepts_date =
+		#{accepts_date,jdbcType=TIMESTAMP},
+		patient_sex =
+		#{patient_sex,jdbcType=VARCHAR},
+		patient_birthday =
+		#{patient_birthday,jdbcType=TIMESTAMP},
+		patient_age =
+		#{patient_age,jdbcType=VARCHAR},
+		institution_name =
+		#{institution_name,jdbcType=VARCHAR},
+		move_date =
+		#{move_date,jdbcType=TIMESTAMP},
+		name_quanpin =
+		#{name_quanpin,jdbcType=VARCHAR},
+		name_first_pinyin =
+		#{name_first_pinyin,jdbcType=VARCHAR},
+		bespokeId =
+		#{bespokeId,jdbcType=VARCHAR},
+		patinetRecord_status =
+		#{patinetRecord_status,jdbcType=VARCHAR},
+		record_check_body =
+		#{record_check_body,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="getByName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from pis_patient_record
+		where patient_name = #{name,jdbcType=VARCHAR}
+	</select>
+	<update id="modByName" parameterType="java.lang.String">
+		update pis_patient_record
+		set patient_name=#{newName,jdbcType=VARCHAR} where
+		patient_name=#{oldName,jdbcType=VARCHAR}
+	</update>
+
+	<insert id="saveRd" parameterType="java.lang.String">
+		insert into pis_patient_record <!-- (id,patient_name,patient_tel) VALUES(REPLACE(UUID(),'-',''),#{name,jdbcType=VARCHAR},#{tel,jdbcType=VARCHAR}) -->
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			<if test="patient_name != null">patient_name,</if>
+			<if test="patient_tel != null">patient_tel,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			REPLACE(UUID(),'-',''),
+			<if test="patient_name != null">#{patient_name,jdbcType=VARCHAR},</if>
+			<if test="patient_tel != null">#{patient_tel,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+	
+	<select id="queryRecords" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from pis_patient_record
+		<where>
+		 <if test="patient_name != null">and patient_name = #{patient_name,jdbcType=VARCHAR}</if>
+		 <if test="dicom_patient_id != null">and dicom_patient_id = #{dicom_patient_id,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+</mapper>

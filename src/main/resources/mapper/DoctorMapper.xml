@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drcsy.am.dao.DoctorMapper" >
+  <resultMap id="BaseResultMap" type="com.drcsy.am.dto.Doctor" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="login_name" property="login_name" jdbcType="VARCHAR" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="belong_hospital_id" property="belong_hospital_id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="work_date" property="work_date" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="status_desc" property="status_desc" jdbcType="VARCHAR" />
+    <result column="hospital_name" property="hospital_name" jdbcType="VARCHAR" />
+    <result column="hospital2_name" property="hospital2_name" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="doctor_type" property="doctor_type" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DOUBLE" />
+    <result column="weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="specialty" property="specialty" jdbcType="VARCHAR" />
+    <result column="produce" property="produce" jdbcType="VARCHAR" />
+    <result column="cards" property="cards" jdbcType="VARCHAR" />
+    <result column="modify_date" property="modify_date" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="create_date" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="head_image" property="head_image" jdbcType="VARCHAR" />
+    <result column="card_image" property="card_image" jdbcType="VARCHAR" />
+    <result column="doctor_image" property="doctor_image" jdbcType="VARCHAR" />
+    <result column="title_image" property="title_image" jdbcType="VARCHAR" />
+    <result column="is_apply_doctor" property="is_apply_doctor" jdbcType="VARCHAR" />
+    <result column="is_operate_doctor" property="is_operate_doctor" jdbcType="VARCHAR" />
+    <result column="is_diagnosis_doctor" property="is_diagnosis_doctor" jdbcType="VARCHAR" />
+    <result column="is_audit_doctor" property="is_audit_doctor" jdbcType="VARCHAR" />
+    <result column="work_time" property="work_time" jdbcType="VARCHAR" />
+    <result column="is_online" property="is_online" jdbcType="VARCHAR" />
+    <result column="name_quanpin" property="name_quanpin" jdbcType="VARCHAR" />
+    <result column="name_first_pinyin" property="name_first_pinyin" jdbcType="VARCHAR" />
+    <result column="belong_city" property="belong_city" jdbcType="VARCHAR" />
+    <result column="department_tel" property="department_tel" jdbcType="VARCHAR" />
+    <result column="doctor_number" property="doctor_number" jdbcType="VARCHAR" />
+    <result column="idcard_number" property="idcard_number" jdbcType="VARCHAR" />
+    <result column="title_number" property="title_number" jdbcType="VARCHAR" />
+    <result column="default_apply_doctor" property="default_apply_doctor" jdbcType="VARCHAR" />
+    <result column="default_diagnosis_doctor" property="default_diagnosis_doctor" jdbcType="VARCHAR" />
+    <result column="voice_Status" property="voice_Status" jdbcType="VARCHAR" />
+    <result column="channelId" property="channelId" jdbcType="VARCHAR" />
+    <result column="is_extension_worker" property="is_extension_worker" jdbcType="INTEGER" />
+    <result column="device_type" property="device_type" jdbcType="VARCHAR" />
+    <result column="doctor_signature" property="doctor_signature" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, login_name, pwd, belong_hospital_id, name, tel, sex, birthday, work_date, status, 
+    status_desc, hospital_name, hospital2_name, department, title, doctor_type, account, 
+    cost, weixin, email, specialty, produce, cards, modify_date, create_date, remark, 
+    head_image, card_image, doctor_image, title_image, is_apply_doctor, is_operate_doctor, 
+    is_diagnosis_doctor, is_audit_doctor, work_time, is_online, name_quanpin, name_first_pinyin, 
+    belong_city, department_tel, doctor_number, idcard_number, title_number, default_apply_doctor, 
+    default_diagnosis_doctor, voice_Status, channelId, is_extension_worker, device_type, 
+    doctor_signature
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pis_doctor
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.drcsy.am.dto.Doctor" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pis_doctor (id, login_name, pwd, 
+      belong_hospital_id, name, tel, 
+      sex, birthday, work_date, 
+      status, status_desc, hospital_name, 
+      hospital2_name, department, title, 
+      doctor_type, account, cost, 
+      weixin, email, specialty, 
+      produce, cards, modify_date, 
+      create_date, remark, head_image, 
+      card_image, doctor_image, title_image, 
+      is_apply_doctor, is_operate_doctor, is_diagnosis_doctor, 
+      is_audit_doctor, work_time, is_online, 
+      name_quanpin, name_first_pinyin, belong_city, 
+      department_tel, doctor_number, idcard_number, 
+      title_number, default_apply_doctor, default_diagnosis_doctor, 
+      voice_Status, channelId, is_extension_worker, 
+      device_type, doctor_signature)
+    values (#{id,jdbcType=VARCHAR}, #{login_name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{belong_hospital_id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{work_date,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{status_desc,jdbcType=VARCHAR}, #{hospital_name,jdbcType=VARCHAR}, 
+      #{hospital2_name,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{doctor_type,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{cost,jdbcType=DOUBLE}, 
+      #{weixin,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
+      #{produce,jdbcType=VARCHAR}, #{cards,jdbcType=VARCHAR}, #{modify_date,jdbcType=TIMESTAMP}, 
+      #{create_date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{head_image,jdbcType=VARCHAR}, 
+      #{card_image,jdbcType=VARCHAR}, #{doctor_image,jdbcType=VARCHAR}, #{title_image,jdbcType=VARCHAR}, 
+      #{is_apply_doctor,jdbcType=VARCHAR}, #{is_operate_doctor,jdbcType=VARCHAR}, #{is_diagnosis_doctor,jdbcType=VARCHAR}, 
+      #{is_audit_doctor,jdbcType=VARCHAR}, #{work_time,jdbcType=VARCHAR}, #{is_online,jdbcType=VARCHAR}, 
+      #{name_quanpin,jdbcType=VARCHAR}, #{name_first_pinyin,jdbcType=VARCHAR}, #{belong_city,jdbcType=VARCHAR}, 
+      #{department_tel,jdbcType=VARCHAR}, #{doctor_number,jdbcType=VARCHAR}, #{idcard_number,jdbcType=VARCHAR}, 
+      #{title_number,jdbcType=VARCHAR}, #{default_apply_doctor,jdbcType=VARCHAR}, #{default_diagnosis_doctor,jdbcType=VARCHAR}, 
+      #{voice_Status,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{is_extension_worker,jdbcType=INTEGER}, 
+      #{device_type,jdbcType=VARCHAR}, #{doctor_signature,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drcsy.am.dto.Doctor" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pis_doctor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="login_name != null" >
+        login_name,
+      </if>
+      <if test="pwd != null" >
+        pwd,
+      </if>
+      <if test="belong_hospital_id != null" >
+        belong_hospital_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="work_date != null" >
+        work_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="status_desc != null" >
+        status_desc,
+      </if>
+      <if test="hospital_name != null" >
+        hospital_name,
+      </if>
+      <if test="hospital2_name != null" >
+        hospital2_name,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="doctor_type != null" >
+        doctor_type,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="weixin != null" >
+        weixin,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="specialty != null" >
+        specialty,
+      </if>
+      <if test="produce != null" >
+        produce,
+      </if>
+      <if test="cards != null" >
+        cards,
+      </if>
+      <if test="modify_date != null" >
+        modify_date,
+      </if>
+      <if test="create_date != null" >
+        create_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="head_image != null" >
+        head_image,
+      </if>
+      <if test="card_image != null" >
+        card_image,
+      </if>
+      <if test="doctor_image != null" >
+        doctor_image,
+      </if>
+      <if test="title_image != null" >
+        title_image,
+      </if>
+      <if test="is_apply_doctor != null" >
+        is_apply_doctor,
+      </if>
+      <if test="is_operate_doctor != null" >
+        is_operate_doctor,
+      </if>
+      <if test="is_diagnosis_doctor != null" >
+        is_diagnosis_doctor,
+      </if>
+      <if test="is_audit_doctor != null" >
+        is_audit_doctor,
+      </if>
+      <if test="work_time != null" >
+        work_time,
+      </if>
+      <if test="is_online != null" >
+        is_online,
+      </if>
+      <if test="name_quanpin != null" >
+        name_quanpin,
+      </if>
+      <if test="name_first_pinyin != null" >
+        name_first_pinyin,
+      </if>
+      <if test="belong_city != null" >
+        belong_city,
+      </if>
+      <if test="department_tel != null" >
+        department_tel,
+      </if>
+      <if test="doctor_number != null" >
+        doctor_number,
+      </if>
+      <if test="idcard_number != null" >
+        idcard_number,
+      </if>
+      <if test="title_number != null" >
+        title_number,
+      </if>
+      <if test="default_apply_doctor != null" >
+        default_apply_doctor,
+      </if>
+      <if test="default_diagnosis_doctor != null" >
+        default_diagnosis_doctor,
+      </if>
+      <if test="voice_Status != null" >
+        voice_Status,
+      </if>
+      <if test="channelId != null" >
+        channelId,
+      </if>
+      <if test="is_extension_worker != null" >
+        is_extension_worker,
+      </if>
+      <if test="device_type != null" >
+        device_type,
+      </if>
+      <if test="doctor_signature != null" >
+        doctor_signature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="login_name != null" >
+        #{login_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="belong_hospital_id != null" >
+        #{belong_hospital_id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="work_date != null" >
+        #{work_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null" >
+        #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_name != null" >
+        #{hospital_name,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital2_name != null" >
+        #{hospital2_name,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_type != null" >
+        #{doctor_type,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="produce != null" >
+        #{produce,jdbcType=VARCHAR},
+      </if>
+      <if test="cards != null" >
+        #{cards,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_date != null" >
+        #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="head_image != null" >
+        #{head_image,jdbcType=VARCHAR},
+      </if>
+      <if test="card_image != null" >
+        #{card_image,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_image != null" >
+        #{doctor_image,jdbcType=VARCHAR},
+      </if>
+      <if test="title_image != null" >
+        #{title_image,jdbcType=VARCHAR},
+      </if>
+      <if test="is_apply_doctor != null" >
+        #{is_apply_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="is_operate_doctor != null" >
+        #{is_operate_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="is_diagnosis_doctor != null" >
+        #{is_diagnosis_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="is_audit_doctor != null" >
+        #{is_audit_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="work_time != null" >
+        #{work_time,jdbcType=VARCHAR},
+      </if>
+      <if test="is_online != null" >
+        #{is_online,jdbcType=VARCHAR},
+      </if>
+      <if test="name_quanpin != null" >
+        #{name_quanpin,jdbcType=VARCHAR},
+      </if>
+      <if test="name_first_pinyin != null" >
+        #{name_first_pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="belong_city != null" >
+        #{belong_city,jdbcType=VARCHAR},
+      </if>
+      <if test="department_tel != null" >
+        #{department_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_number != null" >
+        #{doctor_number,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard_number != null" >
+        #{idcard_number,jdbcType=VARCHAR},
+      </if>
+      <if test="title_number != null" >
+        #{title_number,jdbcType=VARCHAR},
+      </if>
+      <if test="default_apply_doctor != null" >
+        #{default_apply_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="default_diagnosis_doctor != null" >
+        #{default_diagnosis_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="voice_Status != null" >
+        #{voice_Status,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="is_extension_worker != null" >
+        #{is_extension_worker,jdbcType=INTEGER},
+      </if>
+      <if test="device_type != null" >
+        #{device_type,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_signature != null" >
+        #{doctor_signature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drcsy.am.dto.Doctor" >
+    update pis_doctor
+    <set >
+      <if test="login_name != null" >
+        login_name = #{login_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="belong_hospital_id != null" >
+        belong_hospital_id = #{belong_hospital_id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="work_date != null" >
+        work_date = #{work_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null" >
+        status_desc = #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_name != null" >
+        hospital_name = #{hospital_name,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital2_name != null" >
+        hospital2_name = #{hospital2_name,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_type != null" >
+        doctor_type = #{doctor_type,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="weixin != null" >
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null" >
+        specialty = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="produce != null" >
+        produce = #{produce,jdbcType=VARCHAR},
+      </if>
+      <if test="cards != null" >
+        cards = #{cards,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_date != null" >
+        modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        create_date = #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="head_image != null" >
+        head_image = #{head_image,jdbcType=VARCHAR},
+      </if>
+      <if test="card_image != null" >
+        card_image = #{card_image,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_image != null" >
+        doctor_image = #{doctor_image,jdbcType=VARCHAR},
+      </if>
+      <if test="title_image != null" >
+        title_image = #{title_image,jdbcType=VARCHAR},
+      </if>
+      <if test="is_apply_doctor != null" >
+        is_apply_doctor = #{is_apply_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="is_operate_doctor != null" >
+        is_operate_doctor = #{is_operate_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="is_diagnosis_doctor != null" >
+        is_diagnosis_doctor = #{is_diagnosis_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="is_audit_doctor != null" >
+        is_audit_doctor = #{is_audit_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="work_time != null" >
+        work_time = #{work_time,jdbcType=VARCHAR},
+      </if>
+      <if test="is_online != null" >
+        is_online = #{is_online,jdbcType=VARCHAR},
+      </if>
+      <if test="name_quanpin != null" >
+        name_quanpin = #{name_quanpin,jdbcType=VARCHAR},
+      </if>
+      <if test="name_first_pinyin != null" >
+        name_first_pinyin = #{name_first_pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="belong_city != null" >
+        belong_city = #{belong_city,jdbcType=VARCHAR},
+      </if>
+      <if test="department_tel != null" >
+        department_tel = #{department_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_number != null" >
+        doctor_number = #{doctor_number,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard_number != null" >
+        idcard_number = #{idcard_number,jdbcType=VARCHAR},
+      </if>
+      <if test="title_number != null" >
+        title_number = #{title_number,jdbcType=VARCHAR},
+      </if>
+      <if test="default_apply_doctor != null" >
+        default_apply_doctor = #{default_apply_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="default_diagnosis_doctor != null" >
+        default_diagnosis_doctor = #{default_diagnosis_doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="voice_Status != null" >
+        voice_Status = #{voice_Status,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channelId = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="is_extension_worker != null" >
+        is_extension_worker = #{is_extension_worker,jdbcType=INTEGER},
+      </if>
+      <if test="device_type != null" >
+        device_type = #{device_type,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_signature != null" >
+        doctor_signature = #{doctor_signature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drcsy.am.dto.Doctor" >
+    update pis_doctor
+    set login_name = #{login_name,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      belong_hospital_id = #{belong_hospital_id,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      work_date = #{work_date,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      status_desc = #{status_desc,jdbcType=VARCHAR},
+      hospital_name = #{hospital_name,jdbcType=VARCHAR},
+      hospital2_name = #{hospital2_name,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      doctor_type = #{doctor_type,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DOUBLE},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      produce = #{produce,jdbcType=VARCHAR},
+      cards = #{cards,jdbcType=VARCHAR},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      head_image = #{head_image,jdbcType=VARCHAR},
+      card_image = #{card_image,jdbcType=VARCHAR},
+      doctor_image = #{doctor_image,jdbcType=VARCHAR},
+      title_image = #{title_image,jdbcType=VARCHAR},
+      is_apply_doctor = #{is_apply_doctor,jdbcType=VARCHAR},
+      is_operate_doctor = #{is_operate_doctor,jdbcType=VARCHAR},
+      is_diagnosis_doctor = #{is_diagnosis_doctor,jdbcType=VARCHAR},
+      is_audit_doctor = #{is_audit_doctor,jdbcType=VARCHAR},
+      work_time = #{work_time,jdbcType=VARCHAR},
+      is_online = #{is_online,jdbcType=VARCHAR},
+      name_quanpin = #{name_quanpin,jdbcType=VARCHAR},
+      name_first_pinyin = #{name_first_pinyin,jdbcType=VARCHAR},
+      belong_city = #{belong_city,jdbcType=VARCHAR},
+      department_tel = #{department_tel,jdbcType=VARCHAR},
+      doctor_number = #{doctor_number,jdbcType=VARCHAR},
+      idcard_number = #{idcard_number,jdbcType=VARCHAR},
+      title_number = #{title_number,jdbcType=VARCHAR},
+      default_apply_doctor = #{default_apply_doctor,jdbcType=VARCHAR},
+      default_diagnosis_doctor = #{default_diagnosis_doctor,jdbcType=VARCHAR},
+      voice_Status = #{voice_Status,jdbcType=VARCHAR},
+      channelId = #{channelId,jdbcType=VARCHAR},
+      is_extension_worker = #{is_extension_worker,jdbcType=INTEGER},
+      device_type = #{device_type,jdbcType=VARCHAR},
+      doctor_signature = #{doctor_signature,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

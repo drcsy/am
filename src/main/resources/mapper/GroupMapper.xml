@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drcsy.am.dao.GroupMapper" >
+  <resultMap id="BaseResultMap" type="com.drcsy.am.dto.Group" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="group_name" property="group_name" jdbcType="VARCHAR" />
+    <result column="group_members" property="group_members" jdbcType="VARCHAR" />
+    <result column="doctor_id" property="doctor_id" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="status_desc" property="status_desc" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DOUBLE" />
+    <result column="group_info" property="group_info" jdbcType="VARCHAR" />
+    <result column="modify_date" property="modify_date" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="create_date" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="name_quanpin" property="name_quanpin" jdbcType="VARCHAR" />
+    <result column="name_first_pinyin" property="name_first_pinyin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_name, group_members, doctor_id, status, status_desc, account, cost, group_info, 
+    modify_date, create_date, remark, name_quanpin, name_first_pinyin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pis_doctor_group
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pis_doctor_group
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.drcsy.am.dto.Group" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pis_doctor_group (id, group_name, group_members, 
+      doctor_id, status, status_desc, 
+      account, cost, group_info, 
+      modify_date, create_date, remark, 
+      name_quanpin, name_first_pinyin)
+    values (#{id,jdbcType=VARCHAR}, #{group_name,jdbcType=VARCHAR}, #{group_members,jdbcType=VARCHAR}, 
+      #{doctor_id,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{status_desc,jdbcType=VARCHAR}, 
+      #{account,jdbcType=VARCHAR}, #{cost,jdbcType=DOUBLE}, #{group_info,jdbcType=VARCHAR}, 
+      #{modify_date,jdbcType=TIMESTAMP}, #{create_date,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{name_quanpin,jdbcType=VARCHAR}, #{name_first_pinyin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drcsy.am.dto.Group" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pis_doctor_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="group_name != null" >
+        group_name,
+      </if>
+      <if test="group_members != null" >
+        group_members,
+      </if>
+      <if test="doctor_id != null" >
+        doctor_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="status_desc != null" >
+        status_desc,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="group_info != null" >
+        group_info,
+      </if>
+      <if test="modify_date != null" >
+        modify_date,
+      </if>
+      <if test="create_date != null" >
+        create_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="name_quanpin != null" >
+        name_quanpin,
+      </if>
+      <if test="name_first_pinyin != null" >
+        name_first_pinyin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="group_name != null" >
+        #{group_name,jdbcType=VARCHAR},
+      </if>
+      <if test="group_members != null" >
+        #{group_members,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_id != null" >
+        #{doctor_id,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null" >
+        #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="group_info != null" >
+        #{group_info,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_date != null" >
+        #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="name_quanpin != null" >
+        #{name_quanpin,jdbcType=VARCHAR},
+      </if>
+      <if test="name_first_pinyin != null" >
+        #{name_first_pinyin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drcsy.am.dto.Group" >
+    update pis_doctor_group
+    <set >
+      <if test="group_name != null" >
+        group_name = #{group_name,jdbcType=VARCHAR},
+      </if>
+      <if test="group_members != null" >
+        group_members = #{group_members,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_id != null" >
+        doctor_id = #{doctor_id,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null" >
+        status_desc = #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="group_info != null" >
+        group_info = #{group_info,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_date != null" >
+        modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        create_date = #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="name_quanpin != null" >
+        name_quanpin = #{name_quanpin,jdbcType=VARCHAR},
+      </if>
+      <if test="name_first_pinyin != null" >
+        name_first_pinyin = #{name_first_pinyin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drcsy.am.dto.Group" >
+    update pis_doctor_group
+    set group_name = #{group_name,jdbcType=VARCHAR},
+      group_members = #{group_members,jdbcType=VARCHAR},
+      doctor_id = #{doctor_id,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      status_desc = #{status_desc,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DOUBLE},
+      group_info = #{group_info,jdbcType=VARCHAR},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      name_quanpin = #{name_quanpin,jdbcType=VARCHAR},
+      name_first_pinyin = #{name_first_pinyin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

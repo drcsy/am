@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drcsy.am.dao.GMemberMapper" >
+  <resultMap id="BaseResultMap" type="com.drcsy.am.dto.GMember" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="doctor_group_id" property="doctor_group_id" jdbcType="VARCHAR" />
+    <result column="doctor_id" property="doctor_id" jdbcType="VARCHAR" />
+    <result column="cons_weight" property="cons_weight" jdbcType="DOUBLE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="status_desc" property="status_desc" jdbcType="VARCHAR" />
+    <result column="modify_date" property="modify_date" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="create_date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.drcsy.am.dto.GMember" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, doctor_group_id, doctor_id, cons_weight, status, status_desc, modify_date, create_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pis_group_members
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pis_group_members
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.drcsy.am.dto.GMember" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pis_group_members (id, doctor_group_id, doctor_id, 
+      cons_weight, status, status_desc, 
+      modify_date, create_date, remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{doctor_group_id,jdbcType=VARCHAR}, #{doctor_id,jdbcType=VARCHAR}, 
+      #{cons_weight,jdbcType=DOUBLE}, #{status,jdbcType=VARCHAR}, #{status_desc,jdbcType=VARCHAR}, 
+      #{modify_date,jdbcType=TIMESTAMP}, #{create_date,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.drcsy.am.dto.GMember" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pis_group_members
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="doctor_group_id != null" >
+        doctor_group_id,
+      </if>
+      <if test="doctor_id != null" >
+        doctor_id,
+      </if>
+      <if test="cons_weight != null" >
+        cons_weight,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="status_desc != null" >
+        status_desc,
+      </if>
+      <if test="modify_date != null" >
+        modify_date,
+      </if>
+      <if test="create_date != null" >
+        create_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="doctor_group_id != null" >
+        #{doctor_group_id,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_id != null" >
+        #{doctor_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cons_weight != null" >
+        #{cons_weight,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null" >
+        #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_date != null" >
+        #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drcsy.am.dto.GMember" >
+    update pis_group_members
+    <set >
+      <if test="doctor_group_id != null" >
+        doctor_group_id = #{doctor_group_id,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor_id != null" >
+        doctor_id = #{doctor_id,jdbcType=VARCHAR},
+      </if>
+      <if test="cons_weight != null" >
+        cons_weight = #{cons_weight,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null" >
+        status_desc = #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_date != null" >
+        modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        create_date = #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.drcsy.am.dto.GMember" >
+    update pis_group_members
+    set doctor_group_id = #{doctor_group_id,jdbcType=VARCHAR},
+      doctor_id = #{doctor_id,jdbcType=VARCHAR},
+      cons_weight = #{cons_weight,jdbcType=DOUBLE},
+      status = #{status,jdbcType=VARCHAR},
+      status_desc = #{status_desc,jdbcType=VARCHAR},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drcsy.am.dto.GMember" >
+    update pis_group_members
+    set doctor_group_id = #{doctor_group_id,jdbcType=VARCHAR},
+      doctor_id = #{doctor_id,jdbcType=VARCHAR},
+      cons_weight = #{cons_weight,jdbcType=DOUBLE},
+      status = #{status,jdbcType=VARCHAR},
+      status_desc = #{status_desc,jdbcType=VARCHAR},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      create_date = #{create_date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

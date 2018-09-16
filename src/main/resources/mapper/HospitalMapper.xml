@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drcsy.am.dao.HospitalMapper" >
+  <resultMap id="BaseResultMap" type="com.drcsy.am.dto.Hospital" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="hospital_name" property="hospital_name" jdbcType="VARCHAR" />
+    <result column="hospital_short" property="hospital_short" jdbcType="VARCHAR" />
+    <result column="grade1" property="grade1" jdbcType="VARCHAR" />
+    <result column="grade2" property="grade2" jdbcType="VARCHAR" />
+    <result column="grade3" property="grade3" jdbcType="VARCHAR" />
+    <result column="hospital_type" property="hospital_type" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="contact_tel" property="contact_tel" jdbcType="VARCHAR" />
+    <result column="register_date" property="register_date" jdbcType="VARCHAR" />
+    <result column="salesman" property="salesman" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="status_desc" property="status_desc" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DOUBLE" />
+    <result column="files" property="files" jdbcType="VARCHAR" />
+    <result column="modify_date" property="modify_date" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="create_date" jdbcType="TIMESTAMP" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="moved_fee" property="moved_fee" jdbcType="DOUBLE" />
+    <result column="name_quanpin" property="name_quanpin" jdbcType="VARCHAR" />
+    <result column="name_first_pinyin" property="name_first_pinyin" jdbcType="VARCHAR" />
+    <result column="salesman_tel" property="salesman_tel" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="star_level" property="star_level" jdbcType="INTEGER" />
+    <result column="practice_license" property="practice_license" jdbcType="VARCHAR" />
+    <result column="hospital_logo" property="hospital_logo" jdbcType="VARCHAR" />
+    <result column="parent_hospital_code" property="parent_hospital_code" jdbcType="VARCHAR" />
+    <result column="is_center_hospital" property="is_center_hospital" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.drcsy.am.dto.Hospital" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hospital_name, hospital_short, grade1, grade2, grade3, hospital_type, contact, 
+    contact_tel, register_date, salesman, status, status_desc, account, cost, files, 
+    modify_date, create_date, code, moved_fee, name_quanpin, name_first_pinyin, salesman_tel, 
+    introduction, province, city, area, address, star_level, practice_license, hospital_logo, 
+    parent_hospital_code, is_center_hospital
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from pis_hospital
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pis_hospital
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.drcsy.am.dto.Hospital" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pis_hospital (id, hospital_name, hospital_short, 
+      grade1, grade2, grade3, 
+      hospital_type, contact, contact_tel, 
+      register_date, salesman, status, 
+      status_desc, account, cost, 
+      files, modify_date, create_date, 
+      code, moved_fee, name_quanpin, 
+      name_first_pinyin, salesman_tel, introduction, 
+      province, city, area, 
+      address, star_level, practice_license, 
+      hospital_logo, parent_hospital_code, is_center_hospital, 
+      remark)
+    values (#{id,jdbcType=VARCHAR}, #{hospital_name,jdbcType=VARCHAR}, #{hospital_short,jdbcType=VARCHAR}, 
+      #{grade1,jdbcType=VARCHAR}, #{grade2,jdbcType=VARCHAR}, #{grade3,jdbcType=VARCHAR}, 
+      #{hospital_type,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{contact_tel,jdbcType=VARCHAR}, 
+      #{register_date,jdbcType=VARCHAR}, #{salesman,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{status_desc,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{cost,jdbcType=DOUBLE}, 
+      #{files,jdbcType=VARCHAR}, #{modify_date,jdbcType=TIMESTAMP}, #{create_date,jdbcType=TIMESTAMP}, 
+      #{code,jdbcType=VARCHAR}, #{moved_fee,jdbcType=DOUBLE}, #{name_quanpin,jdbcType=VARCHAR}, 
+      #{name_first_pinyin,jdbcType=VARCHAR}, #{salesman_tel,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{star_level,jdbcType=INTEGER}, #{practice_license,jdbcType=VARCHAR}, 
+      #{hospital_logo,jdbcType=VARCHAR}, #{parent_hospital_code,jdbcType=VARCHAR}, #{is_center_hospital,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drcsy.am.dto.Hospital" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pis_hospital
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="hospital_name != null" >
+        hospital_name,
+      </if>
+      <if test="hospital_short != null" >
+        hospital_short,
+      </if>
+      <if test="grade1 != null" >
+        grade1,
+      </if>
+      <if test="grade2 != null" >
+        grade2,
+      </if>
+      <if test="grade3 != null" >
+        grade3,
+      </if>
+      <if test="hospital_type != null" >
+        hospital_type,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="contact_tel != null" >
+        contact_tel,
+      </if>
+      <if test="register_date != null" >
+        register_date,
+      </if>
+      <if test="salesman != null" >
+        salesman,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="status_desc != null" >
+        status_desc,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="files != null" >
+        files,
+      </if>
+      <if test="modify_date != null" >
+        modify_date,
+      </if>
+      <if test="create_date != null" >
+        create_date,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="moved_fee != null" >
+        moved_fee,
+      </if>
+      <if test="name_quanpin != null" >
+        name_quanpin,
+      </if>
+      <if test="name_first_pinyin != null" >
+        name_first_pinyin,
+      </if>
+      <if test="salesman_tel != null" >
+        salesman_tel,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="star_level != null" >
+        star_level,
+      </if>
+      <if test="practice_license != null" >
+        practice_license,
+      </if>
+      <if test="hospital_logo != null" >
+        hospital_logo,
+      </if>
+      <if test="parent_hospital_code != null" >
+        parent_hospital_code,
+      </if>
+      <if test="is_center_hospital != null" >
+        is_center_hospital,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="hospital_name != null" >
+        #{hospital_name,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_short != null" >
+        #{hospital_short,jdbcType=VARCHAR},
+      </if>
+      <if test="grade1 != null" >
+        #{grade1,jdbcType=VARCHAR},
+      </if>
+      <if test="grade2 != null" >
+        #{grade2,jdbcType=VARCHAR},
+      </if>
+      <if test="grade3 != null" >
+        #{grade3,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_type != null" >
+        #{hospital_type,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contact_tel != null" >
+        #{contact_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="register_date != null" >
+        #{register_date,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null" >
+        #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null" >
+        #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="files != null" >
+        #{files,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_date != null" >
+        #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="moved_fee != null" >
+        #{moved_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="name_quanpin != null" >
+        #{name_quanpin,jdbcType=VARCHAR},
+      </if>
+      <if test="name_first_pinyin != null" >
+        #{name_first_pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman_tel != null" >
+        #{salesman_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="star_level != null" >
+        #{star_level,jdbcType=INTEGER},
+      </if>
+      <if test="practice_license != null" >
+        #{practice_license,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_logo != null" >
+        #{hospital_logo,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_hospital_code != null" >
+        #{parent_hospital_code,jdbcType=VARCHAR},
+      </if>
+      <if test="is_center_hospital != null" >
+        #{is_center_hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drcsy.am.dto.Hospital" >
+    update pis_hospital
+    <set >
+      <if test="hospital_name != null" >
+        hospital_name = #{hospital_name,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_short != null" >
+        hospital_short = #{hospital_short,jdbcType=VARCHAR},
+      </if>
+      <if test="grade1 != null" >
+        grade1 = #{grade1,jdbcType=VARCHAR},
+      </if>
+      <if test="grade2 != null" >
+        grade2 = #{grade2,jdbcType=VARCHAR},
+      </if>
+      <if test="grade3 != null" >
+        grade3 = #{grade3,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_type != null" >
+        hospital_type = #{hospital_type,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contact_tel != null" >
+        contact_tel = #{contact_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="register_date != null" >
+        register_date = #{register_date,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null" >
+        salesman = #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="status_desc != null" >
+        status_desc = #{status_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="files != null" >
+        files = #{files,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_date != null" >
+        modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_date != null" >
+        create_date = #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="moved_fee != null" >
+        moved_fee = #{moved_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="name_quanpin != null" >
+        name_quanpin = #{name_quanpin,jdbcType=VARCHAR},
+      </if>
+      <if test="name_first_pinyin != null" >
+        name_first_pinyin = #{name_first_pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman_tel != null" >
+        salesman_tel = #{salesman_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="star_level != null" >
+        star_level = #{star_level,jdbcType=INTEGER},
+      </if>
+      <if test="practice_license != null" >
+        practice_license = #{practice_license,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_logo != null" >
+        hospital_logo = #{hospital_logo,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_hospital_code != null" >
+        parent_hospital_code = #{parent_hospital_code,jdbcType=VARCHAR},
+      </if>
+      <if test="is_center_hospital != null" >
+        is_center_hospital = #{is_center_hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.drcsy.am.dto.Hospital" >
+    update pis_hospital
+    set hospital_name = #{hospital_name,jdbcType=VARCHAR},
+      hospital_short = #{hospital_short,jdbcType=VARCHAR},
+      grade1 = #{grade1,jdbcType=VARCHAR},
+      grade2 = #{grade2,jdbcType=VARCHAR},
+      grade3 = #{grade3,jdbcType=VARCHAR},
+      hospital_type = #{hospital_type,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      contact_tel = #{contact_tel,jdbcType=VARCHAR},
+      register_date = #{register_date,jdbcType=VARCHAR},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      status_desc = #{status_desc,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DOUBLE},
+      files = #{files,jdbcType=VARCHAR},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      moved_fee = #{moved_fee,jdbcType=DOUBLE},
+      name_quanpin = #{name_quanpin,jdbcType=VARCHAR},
+      name_first_pinyin = #{name_first_pinyin,jdbcType=VARCHAR},
+      salesman_tel = #{salesman_tel,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      star_level = #{star_level,jdbcType=INTEGER},
+      practice_license = #{practice_license,jdbcType=VARCHAR},
+      hospital_logo = #{hospital_logo,jdbcType=VARCHAR},
+      parent_hospital_code = #{parent_hospital_code,jdbcType=VARCHAR},
+      is_center_hospital = #{is_center_hospital,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drcsy.am.dto.Hospital" >
+    update pis_hospital
+    set hospital_name = #{hospital_name,jdbcType=VARCHAR},
+      hospital_short = #{hospital_short,jdbcType=VARCHAR},
+      grade1 = #{grade1,jdbcType=VARCHAR},
+      grade2 = #{grade2,jdbcType=VARCHAR},
+      grade3 = #{grade3,jdbcType=VARCHAR},
+      hospital_type = #{hospital_type,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      contact_tel = #{contact_tel,jdbcType=VARCHAR},
+      register_date = #{register_date,jdbcType=VARCHAR},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      status_desc = #{status_desc,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DOUBLE},
+      files = #{files,jdbcType=VARCHAR},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      moved_fee = #{moved_fee,jdbcType=DOUBLE},
+      name_quanpin = #{name_quanpin,jdbcType=VARCHAR},
+      name_first_pinyin = #{name_first_pinyin,jdbcType=VARCHAR},
+      salesman_tel = #{salesman_tel,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      star_level = #{star_level,jdbcType=INTEGER},
+      practice_license = #{practice_license,jdbcType=VARCHAR},
+      hospital_logo = #{hospital_logo,jdbcType=VARCHAR},
+      parent_hospital_code = #{parent_hospital_code,jdbcType=VARCHAR},
+      is_center_hospital = #{is_center_hospital,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

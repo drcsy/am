@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.drcsy.am.dao.DictMapper" >
+  <resultMap id="BaseResultMap" type="com.drcsy.am.dto.Dict" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="en_name" property="en_name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="db_table_name" property="db_table_name" jdbcType="VARCHAR" />
+    <result column="db_field_name" property="db_field_name" jdbcType="VARCHAR" />
+    <result column="order_code" property="order_code" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="VARCHAR" />
+    <result column="is_hide" property="is_hide" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parent_id" jdbcType="VARCHAR" />
+    <result column="parent_code" property="parent_code" jdbcType="VARCHAR" />
+    <result column="is_leaf" property="is_leaf" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, en_name, code, type, db_table_name, db_field_name, order_code, deleted, 
+    is_hide, parent_id, parent_code, is_leaf, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from system_dict
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from system_dict
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.drcsy.am.dto.Dict" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into system_dict (id, name, en_name, 
+      code, type, db_table_name, 
+      db_field_name, order_code, deleted, 
+      is_hide, parent_id, parent_code, 
+      is_leaf, remark)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{en_name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{db_table_name,jdbcType=VARCHAR}, 
+      #{db_field_name,jdbcType=VARCHAR}, #{order_code,jdbcType=VARCHAR}, #{deleted,jdbcType=VARCHAR}, 
+      #{is_hide,jdbcType=VARCHAR}, #{parent_id,jdbcType=VARCHAR}, #{parent_code,jdbcType=VARCHAR}, 
+      #{is_leaf,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.drcsy.am.dto.Dict" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into system_dict
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="en_name != null" >
+        en_name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="db_table_name != null" >
+        db_table_name,
+      </if>
+      <if test="db_field_name != null" >
+        db_field_name,
+      </if>
+      <if test="order_code != null" >
+        order_code,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="is_hide != null" >
+        is_hide,
+      </if>
+      <if test="parent_id != null" >
+        parent_id,
+      </if>
+      <if test="parent_code != null" >
+        parent_code,
+      </if>
+      <if test="is_leaf != null" >
+        is_leaf,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="en_name != null" >
+        #{en_name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="db_table_name != null" >
+        #{db_table_name,jdbcType=VARCHAR},
+      </if>
+      <if test="db_field_name != null" >
+        #{db_field_name,jdbcType=VARCHAR},
+      </if>
+      <if test="order_code != null" >
+        #{order_code,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="is_hide != null" >
+        #{is_hide,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_id != null" >
+        #{parent_id,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_code != null" >
+        #{parent_code,jdbcType=VARCHAR},
+      </if>
+      <if test="is_leaf != null" >
+        #{is_leaf,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.drcsy.am.dto.Dict" >
+    update system_dict
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="en_name != null" >
+        en_name = #{en_name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="db_table_name != null" >
+        db_table_name = #{db_table_name,jdbcType=VARCHAR},
+      </if>
+      <if test="db_field_name != null" >
+        db_field_name = #{db_field_name,jdbcType=VARCHAR},
+      </if>
+      <if test="order_code != null" >
+        order_code = #{order_code,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="is_hide != null" >
+        is_hide = #{is_hide,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_id != null" >
+        parent_id = #{parent_id,jdbcType=VARCHAR},
+      </if>
+      <if test="parent_code != null" >
+        parent_code = #{parent_code,jdbcType=VARCHAR},
+      </if>
+      <if test="is_leaf != null" >
+        is_leaf = #{is_leaf,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.drcsy.am.dto.Dict" >
+    update system_dict
+    set name = #{name,jdbcType=VARCHAR},
+      en_name = #{en_name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      db_table_name = #{db_table_name,jdbcType=VARCHAR},
+      db_field_name = #{db_field_name,jdbcType=VARCHAR},
+      order_code = #{order_code,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=VARCHAR},
+      is_hide = #{is_hide,jdbcType=VARCHAR},
+      parent_id = #{parent_id,jdbcType=VARCHAR},
+      parent_code = #{parent_code,jdbcType=VARCHAR},
+      is_leaf = #{is_leaf,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
