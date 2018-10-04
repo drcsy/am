@@ -27,8 +27,8 @@ import io.swagger.annotations.ApiOperation;
 * code2Session https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/code2Session.html
 * urlRootPath=https://api.weixin.qq.com/sns/jscode2session 微信接口服务器地址,获取用户唯一标识openid
 * js_code=code 小程序调用wx.login得到code，再传入至此
-* appid=wxdfbbcdbe38d3d442 AppID(小程序ID)
-* secret=d66923ecdefd6da45445c6b1b83fac1a AppSecret(小程序密钥)
+* appid=yourAppId AppID(小程序ID)
+* secret=yourAppSecret AppSecret(小程序密钥)
 * grant_type=authorization_code 此接口固定值
 */
 
