@@ -15,13 +15,11 @@ import com.drcsy.am.service.RecordSVC;
 import com.github.pagehelper.PageHelper;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
+@Api(value = "Drcsy-ApiController-Doc", tags = "患者病历接口")
 @RestController
 @RequestMapping("/api")
-@Api(value = "Drcsy-ApiController-Doc", tags = "患者病历接口")
 public class ApiController {
 	@Autowired
 	private RecordSVC rds;

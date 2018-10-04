@@ -15,6 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfigration {
 	/**
 	 * 添加摘要信息(Docket)
+	 * http://192.168.1.2:8000/swagger-ui.html#/
 	 */
 	@Bean
 	public Docket controllerApi() {
