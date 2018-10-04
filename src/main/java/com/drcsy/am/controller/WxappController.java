@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,6 +23,7 @@ import com.sun.jndi.toolkit.url.UrlUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import com.drcsy.am.pojo.YmlConfiger;
 
 /* 参考
 * wx.login(Object object) https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html
@@ -36,20 +39,25 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping(value = "/wxapp")
 public class WxappController {
-
+	
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private YmlConfiger ymlConfiger;
 
 	@ApiOperation("获取小程序登录接口的用户凭证code")
 	@GetMapping(value = "/login/{code}")
 	public String wxLogin(@PathVariable String code) {
-
+		String appid = ymlConfiger.getAppid(); 
+		String secret = ymlConfiger.getSecret();
 		String urlRootPath = "https://api.weixin.qq.com/sns/jscode2session";
 		String url = urlRootPath
-				+ "?appid=yourAppId&secret=yourAppSecret&grant_type=authorization_code&js_code="
+				+ "?appid="+appid+"&secret="+secret+"&grant_type=authorization_code&js_code="
 				+ code;
+		System.out.println(url);
 		String res = restTemplate.getForEntity(url, String.class).getBody();
 		System.out.println(res);
+		
 		return res;
 	}
 }
